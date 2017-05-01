@@ -1,6 +1,6 @@
 require "capybara/rspec"
 require "./app"
-
+require "pry"
 Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
@@ -16,7 +16,7 @@ end
 
 describe('viewing all of the lists', {:type => :feature}) do
   it('allows a user to see all of the lists that have been created') do
-    list = List.new({:name => 'Epicodus Homework'})
+    list = List.new({:name => 'Epicodus Homework', :id => 1})
     list.save
     visit('/')
     click_link("View All Lists")
