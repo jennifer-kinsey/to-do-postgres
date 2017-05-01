@@ -1,9 +1,9 @@
 class List
 
-  attr_reader(:description, :id)
+  attr_reader(:name, :id)
 
   define_method(:initialize) do |attributes|
-    @description = attributes.fetch(:description)
+    @name = attributes.fetch(:name)
     @id = attributes.fetch(:id)
   end
 
@@ -11,19 +11,19 @@ class List
     returned_lists = DB.exec("SELECT * FROM lists;")
     lists = []
     returned_lists.each() do |list|
-      description = list.fetch("description")
+      name = list.fetch("name")
       id = list.fetch("id").to_i()
-      lists.push(List.new({:description => description, :id => id}))
+      lists.push(List.new({:name => name, :id => id}))
     end
     lists
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO lists (description) VALUES ('#{@description}') RETURNING id;")
+    result = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
   define_method(:==) do |another_list|
-    self.description().==(another_list.description()).&(self.id().==(another_list.id()))
+    self.name().==(another_list.name()).&(self.id().==(another_list.id()))
   end
 end

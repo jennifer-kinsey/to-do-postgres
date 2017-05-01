@@ -7,16 +7,16 @@ describe(List) do
     end
   end
 
-  describe("#description") do
-    it("tells you its description") do
-      list = List.new({:description=> "Epicodus stuff", :id => nil})
-      expect(list.description()).to(eq("Epicodus stuff"))
+  describe("#name") do
+    it("tells you its name") do
+      list = List.new({:name=> "Epicodus stuff", :id => nil})
+      expect(list.name()).to(eq("Epicodus stuff"))
     end
   end
 
   describe("#id") do
     it("sets its ID when you save it") do
-      list = List.new({:description=> "Epicodus stuff", :id => nil})
+      list = List.new({:name=> "Epicodus stuff", :id => nil})
       list.save()
       expect(list.id()).to(be_an_instance_of(Fixnum))
     end
@@ -24,7 +24,7 @@ describe(List) do
 
   describe("#save") do
     it("lets you save lists to the database") do
-      list = List.new({:description=> "Epicodus stuff", :id => nil})
+      list = List.new({:name=> "Epicodus stuff", :id => nil})
       list.save()
       expect(List.all()).to(eq([list]))
     end
@@ -32,8 +32,8 @@ describe(List) do
 
   describe("#==") do
     it("is the same list if it has the same name") do
-      list1 = List.new({:description=> "Epicodus stuff", :id => nil})
-      list2 = List.new({:description=> "Epicodus stuff", :id => nil})
+      list1 = List.new({:name=> "Epicodus stuff", :id => nil})
+      list2 = List.new({:name=> "Epicodus stuff", :id => nil})
       expect(list1).to(eq(list2))
     end
   end
