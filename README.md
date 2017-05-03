@@ -1,13 +1,36 @@
-# <!--PROJECT NAME HERE-->
+# TO DO Lists
 
-<!--PROJECT DESCRIPTION HERE-->
+Make to do lists with tasks
 
 ### Prerequisites
 
 Web browser with ES6 compatibility
 Examples: Chrome, Safari
+Requires making a postgres database:
 
-Ruby <!--VERSION HERE-->
+kinsey=# CREATE DATABASE to_do;
+
+kinsey=# \c to_do
+
+to_do=# CREATE TABLE tasks (id serial PRIMARY KEY, description varchar);
+
+to_do=# CREATE DATABASE to_do_test WITH TEMPLATE to_do;
+
+to_do=# CREATE TABLE lists (id serial PRIMARY KEY, name varchar);
+
+to_do=# DROP DATABASE to_do_test;
+
+to_do=# CREATE DATABASE to_do_test WITH TEMPLATE to_do;
+
+to_do=# ALTER TABLE tasks ADD list_id int;
+
+to_do=# DROP DATABASE to_do_test;
+
+to_do=# CREATE DATABASE to_do_test WITH TEMPLATE to_do;
+
+
+
+Ruby 2.4.1
 Bundler
 
 ### Installing
