@@ -7,10 +7,9 @@ set(:show_exceptions, false)
 describe('adding a new list', {:type => :feature}) do
   it('allows a user to click a list to see the tasks and the details for it') do
     visit('/')
-    click_link('Add New List')
     fill_in('name', :with => 'Epicodus Work')
-    click_button('Add List')
-    expect(page).to have_content('Success!')
+    click_button('Add list')
+    expect(page).to have_content('Epicodus Work')
   end
 end
 
@@ -19,7 +18,6 @@ describe('viewing all of the lists', {:type => :feature}) do
     list = List.new({:name => 'Epicodus Homework', :id => 1})
     list.save
     visit('/')
-    click_link("View All Lists")
     expect(page).to have_content(list.name)
   end
 end
@@ -30,7 +28,7 @@ describe('seeing details for a single list', {:type => :feature}) do
     test_list.save()
     test_task = Task.new({:description => "learn SQL", :list_id => test_list.id()})
     test_task.save()
-    visit('/lists')
+    visit('/')
     click_link(test_list.name())
     expect(page).to have_content(test_task.description())
   end
@@ -40,9 +38,10 @@ describe('adding tasks to a list', {:type => :feature}) do
   it('allows a user to add a task to a list') do
     test_list = List.new({:name => 'School stuff', :id => 3})
     test_list.save()
-    visit("/lists/#{test_list.id()}")
+    visit("/")
+    select('School stuff', :from => 'list_id')
     fill_in("Description", {:with => "learn SQL"})
     click_button("Add task")
-    expect(page).to have_content("Success")
+    expect(page).to have_content("learn SQL")
   end
 end

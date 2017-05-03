@@ -16,7 +16,9 @@ post('/lists') do
   name = params.fetch("name")
   list = List.new({:name => name, :id => nil})
   list.save()
-  erb(:success)
+  @lists = List.all()
+  list.save()
+  erb(:index)
 end
 
 get("/lists/:id") do
@@ -34,6 +36,13 @@ patch("/lists/:id") do
   @list = List.find(params.fetch("id").to_i())
   @list.update({:name => name})
   erb(:list)
+end
+
+delete("/lists/:id") do
+  @list = List.find(params.fetch("id").to_i())
+  @list.delete()
+  @lists = List.all()
+  erb(:index)
 end
 
 post("/tasks") do

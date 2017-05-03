@@ -1,6 +1,6 @@
-<h1>To Do</h1>
-
-<p>Create a new list:</p>
+<h1>To Do Lists</h1>
+<hr>
+<h2>Create a new list:</h2>
 
 <form action="/lists" method="post">
   <label for="name">Assign a name to your list:</label>
@@ -9,7 +9,8 @@
   <button type="submit">Add list</button>
 </form>
 
-<p> Add tasks to any list:</p>
+<hr>
+<h2> Add tasks to any list:</h2>
 
 <form action="/tasks" method="post">
   <label for="list_id">Select a List</label>
@@ -18,16 +19,17 @@
       <option value="<%= list.id()%>"> <%= list.name() %> </option>
     <% end %>
   </select>
+  <br>
 
   <label for="description">Description of the task:</label>
   <input id="description" name="description" type="text">
 
   <button type="submit">Add task</button>
 </form>
-
+<hr>
 
 <% if @lists.any?() %>
-<p>Click on a list to see its tasks:</p>
+<h2>Click on a list to see its tasks:</h2>
 
 <ul>
   <% @lists.each do |list| %>
@@ -37,3 +39,4 @@
 <% else %>
 <p>There are no lists yet!</p>
 <% end %>
+<hr>
